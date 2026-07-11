@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Question for Krisha 💛</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+  .card {
+    background: rgba(255,255,255,0.9);
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    max-width: 420px;
+    z-index: 2;
+  }
+  h1 {
+    font-size: 1.8rem;
+    color: #d1477a;
+    margin-bottom: 10px;
+  }
+  p.name {
+    font-size: 1.2rem;
+    color: #a83e63;
+    margin-bottom: 25px;
+  }
+  .buttons {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    height: 60px;
+  }
+  button {
+    padding: 12px 28px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+  }
+  #yesBtn {
+    background: #ff6b81;
+    color: white;
+  }
+  #yesBtn:hover { transform: scale(1.1); }
+  #noBtn {
+    background: #ddd;
+    color: #555;
+    position: relative;
+  }
+  .hidden { display: none; }
+  #result {
+    margin-top: 20px;
+    font-size: 1.4rem;
+    color: #d1477a;
+    font-weight: bold;
+  }
+  .heart {
+    position: absolute;
+    top: -10%;
+    font-size: 24px;
+    animation: fall linear forwards;
+    z-index: 1;
+  }
+  @keyframes fall {
+    to { transform: translateY(110vh) rotate(360deg); opacity: 0.6; }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Krisha,</h1>
+    <p class="name">will you be my girlfriend? 💌</p>
+    <div class="buttons">
+      <button id="yesBtn" onclick="sayYes()">Yes 💖</button>
+      <button id="noBtn" onmouseover="dodge()" onclick="dodge()">No</button>
+    </div>
+    <div id="result" class="hidden">Yayy! 🎉 You just made my day, Krisha! 💕</div>
+  </div>
+
+<script>
+  const noBtn = document.getElementById('noBtn');
+  const buttonsBox = document.querySelector('.buttons');
+
+  function dodge() {
+    const boxRect = buttonsBox.getBoundingClientRect();
+    const maxX = window.innerWidth - 120;
+    const maxY = window.innerHeight - 60;
+    const newX = Math.max(0, Math.random() * maxX);
+    const newY = Math.max(0, Math.random() * maxY);
+    noBtn.style.position = 'fixed';
+    noBtn.style.left = newX + 'px';
+    noBtn.style.top = newY + 'px';
+  }
+
+  function sayYes() {
+    document.getElementById('result').classList.remove('hidden');
+    document.querySelector('.buttons').classList.add('hidden');
+    spawnHearts();
+  }
+
+  function spawnHearts() {
+    const emojis = ['💖','💕','💗','💓','💞'];
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 300);
+  }
+</script>
+</body>
+</html>
